@@ -1,0 +1,151 @@
+sphinx-gallery (0.10.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 10 Oct 2021 23:07:01 -0400
+
+sphinx-gallery (0.8.2-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints.
+    + python-sphinx-gallery-doc: Add Multi-Arch: foreign.
+
+  [ Sandro Tosi ]
+  * New upstream release
+  * Use the new Debian Python Team contact name and address
+  * debian/copyright
+    - extend packaging copyright years
+  * debian/patches
+    - refresh patches
+  * debian/control
+    - add statsmodels to b-d, needed for doc
+    - bump Standards-Version to 4.5.1 (no changes needed)
+
+ -- Sandro Tosi <morph@debian.org>  Fri, 08 Jan 2021 12:33:25 -0500
+
+sphinx-gallery (0.8.1-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Update Vcs-* fields with new Debian Python Team Salsa
+    layout.
+
+  [ Sandro Tosi ]
+  * New upstream release
+  * debian/control
+    - add plotly to b-d, needed by docs
+  * debian/patches/*
+    - refresh patches
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 25 Oct 2020 21:50:56 -0400
+
+sphinx-gallery (0.7.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/control
+    - add optipng to b-d and recommends
+    - bump b-d on matplotlib to >= 3.2.2
+  * refresh patches
+  * debian/rules
+    - temporary remove plot_8_animations.py, triggers a bug with matplotlib
+      3.2.2
+  * debian/patches/doc-intersphinx.patch
+    - fix sklearn intersphinx location
+    - temporary skip test_full.py, triggers a bug with matplotlib 3.2.2
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 19 Jul 2020 19:47:19 -0400
+
+sphinx-gallery (0.6.2-2) unstable; urgency=medium
+
+  * debian/rules
+    - set PYBUILD_NAME, fixing installation of the module files; Closes: #960415
+
+ -- Sandro Tosi <morph@debian.org>  Tue, 12 May 2020 22:18:52 -0400
+
+sphinx-gallery (0.6.2-1) unstable; urgency=medium
+
+  * New upstream release; Closes: #959889
+  * debian/patches/*
+    - refresh, update patches
+  * debian/rules
+    - make rules look like more a dh + pybuild file
+  * run unittest at build time
+
+ -- Sandro Tosi <morph@debian.org>  Thu, 07 May 2020 22:00:07 -0400
+
+sphinx-gallery (0.5.0-1) unstable; urgency=medium
+
+  * New upstream release; Closes: #901307
+  * debian/copyright
+    - extend packaging copyright years
+  * debian/patches
+    - drop all patches, merged upstream
+  * debian/control
+    - add sphinx-rtd-theme, memory-profiler, ipython to b-d, needed by doc
+    - bump Standards-Version to 4.5.0 (no changes needed)
+  * debian/patches/doc-no-mayavi.patch
+    - remove mayavi references, since we're not building those examples
+  * Use local intersphinx mapping files, if available
+
+ -- Sandro Tosi <morph@debian.org>  Fri, 06 Mar 2020 22:20:36 -0500
+
+sphinx-gallery (0.2.0-3) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Bump Standards-Version to 4.4.1.
+  * Remove python-seaborn from Suggests, it doesn't exists anymore.
+
+  [ Sandro Tosi ]
+  * Drop python2 support; Closes: #938542
+
+ -- Sandro Tosi <morph@debian.org>  Wed, 13 Nov 2019 17:37:40 -0500
+
+sphinx-gallery (0.2.0-2) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Use debhelper-compat instead of debian/compat.
+
+  [ Sandro Tosi ]
+  * debian/control
+    - drop py2 seaborn from, to break a deps cycle; Closes: #940873
+    - bump Standards-Version to 4.4.0 (no changes needed)
+  * debian/copyright
+    - extend packaging copyright years
+
+ -- Sandro Tosi <morph@debian.org>  Sat, 21 Sep 2019 15:36:13 -0400
+
+sphinx-gallery (0.2.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/patches/
+    - drop patches merged upstream, refresh patch for new upstream code
+  * debian/copyright
+    - extend packaging copyright years
+    - update upstream copyright information
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 10 Jun 2018 21:29:43 -0400
+
+sphinx-gallery (0.1.13-2) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Set Vcs-* to salsa.debian.org
+
+  [ Sandro Tosi ]
+  * debian/control
+    - bump Standards-Version to 4.1.4 (no changes needed)
+    - add matplotlib, pil, sphinx, seaborn, mayavi2 to depends/suggests;
+      Closes: #889284
+  * debian/patches/0002-skip-seaborn-tests-require-network-access.patch
+    - skip seaborn tests, require network access; patch taken from Ubuntu;
+      Closes: #888412
+  * debian/patches/0003-use-facecolor-instead-of-axisbg-when-calling-plt.axe.patch
+    - fix example failing with recent matplotlib; Closes: #897497
+  * debian/patches/0004-Fix-compatibility-of-SphinxDocLinkResolver-with-Sphi.patch
+    - fix compatibility with Sphinx 1.7, taked from upstream repo
+
+ -- Sandro Tosi <morph@debian.org>  Thu, 03 May 2018 19:55:46 -0400
+
+sphinx-gallery (0.1.13-1) unstable; urgency=medium
+
+  * Initial release; Closes: #882800
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 26 Nov 2017 16:08:30 -0500

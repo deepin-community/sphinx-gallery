@@ -1,0 +1,4 @@
+doc-no-mayavi.patch
+doc-intersphinx.patch
+test-intersphinx.patch
+test-fixes.patch

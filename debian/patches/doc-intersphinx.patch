@@ -1,0 +1,23 @@
+--- a/doc/conf.py
++++ b/doc/conf.py
+@@ -300,13 +300,13 @@ texinfo_documents = [
+ 
+ # Example configuration for intersphinx: refer to the Python standard library.
+ intersphinx_mapping = {
+-    'python': ('https://docs.python.org/{.major}'.format(sys.version_info), None),
+-    'numpy': ('https://numpy.org/doc/stable/', None),
+-    'matplotlib': ('https://matplotlib.org/', None),
+-    'mayavi': ('http://docs.enthought.com/mayavi/mayavi', None),
+-    'sklearn': ('https://scikit-learn.org/stable', None),
+-    'sphinx': ('https://www.sphinx-doc.org/en/master', None),
+-    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
++    'python': ('/usr/share/doc/python3-doc/html', None),
++    'numpy': ('/usr/share/doc/python-numpy-doc/html', None),
++    'matplotlib': ('/usr/share/doc/python-matplotlib-doc/html', None),
++    'sklearn': ('/usr/share/doc/python-sklearn-doc/html', None),
++    'sphinx': ('/usr/share/doc/sphinx-doc/html', None),
++    'pandas': ('/usr/share/doc/python-pandas-doc/html', None),
++
+ }
+ 
+ examples_dirs = ['../examples', '../tutorials']

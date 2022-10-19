@@ -1,0 +1,21 @@
+--- a/doc/configuration.rst
++++ b/doc/configuration.rst
+@@ -1126,7 +1126,7 @@ The following scrapers are supported:
+     ``'matplotlib'``.
+ - Mayavi
+     Sphinx-Gallery maintains a scraper for
+-    :mod:`Mayavi <mayavi.mlab>` figures via the string
++    `mayavi.mlab` figures via the string
+     ``'mayavi'``.
+ - PyVista
+     `PyVista <https://github.com/pyvista/pyvista>`__ maintains a scraper
+--- a/doc/index.rst
++++ b/doc/index.rst
+@@ -74,7 +74,6 @@ Sphinx-Gallery Show: :ref:`examples-inde
+ 
+    auto_examples/index
+    tutorials/index
+-   auto_mayavi_examples/index
+ 
+ .. toctree::
+    :maxdepth: 2

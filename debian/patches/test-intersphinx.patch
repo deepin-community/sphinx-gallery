@@ -1,0 +1,17 @@
+--- a/sphinx_gallery/tests/tinybuild/conf.py
++++ b/sphinx_gallery/tests/tinybuild/conf.py
+@@ -58,10 +58,10 @@ source_suffix = '.rst'
+ master_doc = 'index'
+ exclude_patterns = ['_build']
+ intersphinx_mapping = {
+-    'python': ('https://docs.python.org/3', None),
+-    'numpy': ('https://numpy.org/doc/stable/', None),
+-    'matplotlib': ('https://matplotlib.org/', None),
+-    'joblib': ('https://joblib.readthedocs.io/en/latest', None),
++    'python': ('/usr/share/doc/python3-doc/html', None),
++    'numpy': ('/usr/share/doc/python-numpy-doc/html', None),
++    'matplotlib': ('/usr/share/doc/python-matplotlib-doc/html', None),
++#    'joblib': ('https://joblib.readthedocs.io/en/latest', None),
+ }
+ sphinx_gallery_conf = {
+     'doc_module': ('sphinx_gallery',),

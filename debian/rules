@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME=sphinx-gallery
+export PYBUILD_AFTER_BUILD=rm -rf $(CURDIR)/examples/plot_8_animations.py ; PYTHONPATH={build_dir} $(MAKE) -C doc html
+export PYBUILD_AFTER_INSTALL=rm -rf $(CURDIR)/debian/*/usr/bin
+
+%:
+	dh $@ --with sphinxdoc,python3 --buildsystem=pybuild
+
+override_dh_installchangelogs:
+	dh_installchangelogs -A CHANGES.rst
+
+override_dh_installdocs:
+	dh_installdocs
+	dh_installdocs -ppython-sphinx-gallery-doc examples/ mayavi_examples/ tutorials/ doc/_build/html/
+
+override_dh_auto_test:
+	dh_auto_test -- --system=custom --test-args='{interpreter} -m pytest --ignore=sphinx_gallery/tests/test_full.py -k-test_embed_code_links_get_data sphinx_gallery/tests'

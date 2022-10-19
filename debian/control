@@ -1,0 +1,62 @@
+Source: sphinx-gallery
+Section: python
+Priority: optional
+Maintainer: Sandro Tosi <morph@debian.org>
+Uploaders: Debian Python Team <team+python@tracker.debian.org>,
+Build-Depends: debhelper-compat (= 9),
+               dh-python,
+               optipng,
+               python-matplotlib-doc <!nodoc>,
+               python-numpy-doc <!nodoc>,
+               python-pandas-doc <!nodoc>,
+               python-sklearn-doc <!nodoc>,
+               python3-all,
+               python3-doc <!nodoc>,
+               python3-ipython <!nodoc>,
+               python3-joblib <!nocheck>,
+               python3-matplotlib (>= 3.2.2),
+               python3-memory-profiler <!nodoc>,
+               python3-pil,
+               python3-plotly <!nodoc>,
+               python3-pytest <!nocheck>,
+               python3-pytest-cov <!nocheck>,
+               python3-pytest-runner <!nocheck>,
+               python3-seaborn,
+               python3-setuptools,
+               python3-sphinx,
+               python3-sphinx-rtd-theme <!nodoc>,
+               python3-statsmodels <!nodoc>,
+               sphinx-doc <!nodoc>,
+Standards-Version: 4.5.1
+Homepage: https://sphinx-gallery.github.io/
+Vcs-Git: https://salsa.debian.org/python-team/packages/sphinx-gallery.git
+Vcs-Browser: https://salsa.debian.org/python-team/packages/sphinx-gallery
+
+Package: python3-sphinx-gallery
+Architecture: all
+Depends: python3-matplotlib,
+         python3-pil,
+         python3-sphinx,
+         ${misc:Depends},
+         ${python3:Depends},
+Recommends: optipng,
+Suggests: python-sphinx-gallery-doc,
+          python3-seaborn,
+Description: extension that builds an HTML gallery of examples from Python scripts (Python 3)
+ * Simple examples that run out of the box are the best way to learn a library
+ * Pleasing, organized, visual layouts
+ * Links, searching, backlinks throughout examples and documentation
+ .
+ This package contains the Python 3 version of sphinx-gallery.
+
+Package: python-sphinx-gallery-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends},
+Multi-Arch: foreign
+Description: extension that builds an HTML gallery of examples from Python scripts (Doc)
+ * Simple examples that run out of the box are the best way to learn a library
+ * Pleasing, organized, visual layouts
+ * Links, searching, backlinks throughout examples and documentation
+ .
+ This package contains documentation for sphinx-gallery.
