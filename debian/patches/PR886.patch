@@ -1,0 +1,56 @@
+From c6362bf43b1335bfefb65a148b872501a914e3b2 Mon Sep 17 00:00:00 2001
+From: Tim Hoffmann <2836374+timhoffm@users.noreply.github.com>
+Date: Wed, 24 Nov 2021 01:48:26 +0100
+Subject: [PATCH 1/2] Fix "Out" layout for pydata-sphinx-theme
+
+Follow up to #484, which got misaligned again, likely through pydata-sphinx-theme.
+
+Note: This is a purely empirical suggestion based on the matplotlib docs, e.g.:
+https://matplotlib.org/devdocs/tutorials/colors/colormap-manipulation.html
+
+I don't know how to find out whether this is generally ok.
+---
+ sphinx_gallery/_static/sg_gallery.css | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sphinx_gallery/_static/sg_gallery.css b/sphinx_gallery/_static/sg_gallery.css
+index 5fdf7f24..3ce8e1ad 100644
+--- a/sphinx_gallery/_static/sg_gallery.css
++++ b/sphinx_gallery/_static/sg_gallery.css
+@@ -82,7 +82,7 @@ p.sphx-glr-script-out {
+ .sphx-glr-script-out .highlight {
+   background-color: transparent;
+   margin-left: 2.5em;
+-  margin-top: -2.1em;
++  margin-top: -2.9em;
+ }
+ .sphx-glr-script-out .highlight pre {
+   background-color: #fafae2;
+
+From 6ebb46080aef98f3aaf04d96bfff497388670ea2 Mon Sep 17 00:00:00 2001
+From: Tim Hoffmann <2836374+timhoffm@users.noreply.github.com>
+Date: Wed, 24 Nov 2021 09:56:37 +0100
+Subject: [PATCH 2/2] Fix broken matplotlib link
+
+A URL is better than a sphinx ref. On the matplotlib side, we at least try to add
+redirects when we change URLs. And even if that's not the case, you'll get
+to the matplotlib main page. We have now way of knowing whether external sites
+reference our doc labels, so they can get broken without notice, and when the do
+it's completely dead.
+---
+ doc/configuration.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/configuration.rst b/doc/configuration.rst
+index 87d59b35..1251d847 100644
+--- a/doc/configuration.rst
++++ b/doc/configuration.rst
+@@ -1190,7 +1190,7 @@ than a single static image of the animation figure, you should add::
+ 
+ HTML embedding options can be changed by setting ``rcParams['animation.html']``
+ and related options in your
+-:ref:`matplotlib rcParams <matplotlib:matplotlib-rcparams>`.
++`matplotlib rcParams <https://matplotlib.org/stable/tutorials/introductory/customizing.html>`_.
+ It's also recommended to ensure that "imagemagick" is available as a
+ ``writer``, which you can check with
+ :class:`matplotlib.animation.ImageMagickWriter.isAvailable()

@@ -1,6 +1,6 @@
 --- a/doc/conf.py
 +++ b/doc/conf.py
-@@ -300,13 +300,13 @@ texinfo_documents = [
+@@ -302,13 +302,13 @@ texinfo_documents = [
  
  # Example configuration for intersphinx: refer to the Python standard library.
  intersphinx_mapping = {

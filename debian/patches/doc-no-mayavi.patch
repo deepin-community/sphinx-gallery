@@ -1,6 +1,6 @@
 --- a/doc/configuration.rst
 +++ b/doc/configuration.rst
-@@ -1126,7 +1126,7 @@ The following scrapers are supported:
+@@ -1206,7 +1206,7 @@ The following scrapers are supported:
      ``'matplotlib'``.
  - Mayavi
      Sphinx-Gallery maintains a scraper for
