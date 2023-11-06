@@ -1,6 +1,6 @@
 --- a/sphinx_gallery/tests/tinybuild/conf.py
 +++ b/sphinx_gallery/tests/tinybuild/conf.py
-@@ -58,10 +58,10 @@ source_suffix = '.rst'
+@@ -64,10 +64,10 @@ source_suffix = '.rst'
  master_doc = 'index'
  exclude_patterns = ['_build']
  intersphinx_mapping = {

@@ -1,0 +1,123 @@
+From f1c7823b9eebf3bad4e1ab5475691d69beab0876 Mon Sep 17 00:00:00 2001
+From: Eric Larson <larson.eric.d@gmail.com>
+Date: Wed, 16 Feb 2022 09:37:46 -0500
+Subject: [PATCH 1/5] MAINT: Remove LooseVersion
+
+---
+ sphinx_gallery/py_source_parser.py | 34 ++++++++++++------------------
+ sphinx_gallery/scrapers.py         |  5 +----
+ 2 files changed, 15 insertions(+), 24 deletions(-)
+
+--- a/sphinx_gallery/py_source_parser.py
++++ b/sphinx_gallery/py_source_parser.py
+@@ -10,10 +10,8 @@ from __future__ import division, absolut
+ 
+ import codecs
+ import ast
+-from distutils.version import LooseVersion
+ from io import BytesIO
+ import re
+-import sys
+ import tokenize
+ from textwrap import dedent
+ 
+@@ -102,26 +100,21 @@ def _get_docstring_and_rest(filename):
+             'unless the file is ignored by "ignore_pattern"'
+             .format(filename))
+ 
+-    if LooseVersion(sys.version) >= LooseVersion('3.7'):
+-        docstring = ast.get_docstring(node)
+-        assert docstring is not None  # should be guaranteed above
+-        # This is just for backward compat
+-        if len(node.body[0].value.s) and node.body[0].value.s[0] == '\n':
+-            # just for strict backward compat here
+-            docstring = '\n' + docstring
+-        ts = tokenize.tokenize(BytesIO(content.encode()).readline)
+-        # find the first string according to the tokenizer and get its end row
+-        for tk in ts:
+-            if tk.exact_type == 3:
+-                lineno, _ = tk.end
+-                break
+-        else:
+-            lineno = 0
++    # Python 3.7+ way
++    docstring = ast.get_docstring(node)
++    assert docstring is not None  # should be guaranteed above
++    # This is just for backward compat
++    if len(node.body[0].value.s) and node.body[0].value.s[0] == '\n':
++        # just for strict backward compat here
++        docstring = '\n' + docstring
++    ts = tokenize.tokenize(BytesIO(content.encode()).readline)
++    # find the first string according to the tokenizer and get its end row
++    for tk in ts:
++        if tk.exact_type == 3:
++            lineno, _ = tk.end
++            break
+     else:
+-        # this block can be removed when python 3.6 support is dropped
+-        docstring_node = node.body[0]
+-        docstring = docstring_node.value.s
+-        lineno = docstring_node.lineno  # The last line of the string.
++        lineno = 0
+ 
+     # This get the content of the file after the docstring last line
+     # Note: 'maxsplit' argument is not a keyword argument in python2
+--- a/sphinx_gallery/scrapers.py
++++ b/sphinx_gallery/scrapers.py
+@@ -17,7 +17,6 @@ import inspect
+ import os
+ import sys
+ import re
+-from distutils.version import LooseVersion
+ from textwrap import indent
+ from pathlib import PurePosixPath
+ from warnings import filterwarnings
+@@ -214,7 +213,6 @@ def matplotlib_scraper(block, block_vars
+ 
+ 
+ def _anim_rst(anim, image_path, gallery_conf):
+-    import matplotlib
+     from matplotlib.animation import FFMpegWriter, ImageMagickWriter
+     # output the thumbnail as the image, as it will just be copied
+     # if it's the file thumbnail
+@@ -224,9 +222,7 @@ def _anim_rst(anim, image_path, gallery_
+     thumb_size = gallery_conf['thumbnail_size']
+     use_dpi = round(
+         min(t_s / f_s for t_s, f_s in zip(thumb_size, fig_size)))
+-    # FFmpeg is buggy for GIFs before Matplotlib 3.3.1
+-    if LooseVersion(matplotlib.__version__) >= LooseVersion('3.3.1') and \
+-            FFMpegWriter.isAvailable():
++    if FFMpegWriter.isAvailable():
+         writer = 'ffmpeg'
+     elif ImageMagickWriter.isAvailable():
+         writer = 'imagemagick'
+--- a/sphinx_gallery/backreferences.py
++++ b/sphinx_gallery/backreferences.py
+@@ -95,9 +95,14 @@ class NameFinder(ast.NodeVisitor):
+                                 obj = last_obj
+                                 class_attr, method = True, [level]
+                                 break
++                            # For most objects this will emit a AttributeError,
++                            # but for some (e.g., PyQt5) you can get other
++                            # errors like "RuntimeError: wrapped C/C++ object
++                            # ... has been deleted" so let's be safer with
++                            # plain Exception
+                             try:
+                                 obj = getattr(obj, level)
+-                            except AttributeError:
++                            except Exception:
+                                 break
+                             if inspect.ismethod(obj):
+                                 obj = last_obj
+--- a/continuous_integration/azure/install.sh
++++ b/continuous_integration/azure/install.sh
+@@ -24,7 +24,8 @@ if [ "$DISTRIB" == "conda" ]; then
+     if [ "$SPHINX_VERSION" == "" ]; then
+         PIP_DEPENDENCIES="${PIP_DEPENDENCIES} sphinx"
+     elif [ "$SPHINX_VERSION" == "dev" ]; then
+-        PIP_DEPENDENCIES="${PIP_DEPENDENCIES} https://api.github.com/repos/sphinx-doc/sphinx/zipball/master"
++        # It is a mystery to me why we need black, but we get an error with sphinx that it's needed at the end of the build...
++        PIP_DEPENDENCIES="${PIP_DEPENDENCIES} https://api.github.com/repos/sphinx-doc/sphinx/zipball/master black"
+     else
+         PIP_DEPENDENCIES="${PIP_DEPENDENCIES} sphinx==${SPHINX_VERSION}"
+     fi

@@ -2,3 +2,5 @@ doc-no-mayavi.patch
 doc-intersphinx.patch
 test-intersphinx.patch
 test-fixes.patch
+PR886.patch
+PR894.patch

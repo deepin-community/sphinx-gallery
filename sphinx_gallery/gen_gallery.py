@@ -63,10 +63,10 @@ DEFAULT_GALLERY_CONF = {
     'ignore_repr_types': r'',
     # Build options
     # -------------
-    # We use a string for 'plot_gallery' rather than simply the Python boolean
-    # `True` as it avoids a warning about unicode when controlling this value
-    # via the command line switches of sphinx-build
-    'plot_gallery': 'True',
+    # 'plot_gallery' also accepts strings that evaluate to a bool, e.g. "True",
+    # "False", "1", "0" so that they can be easily set via command line
+    # switches of sphinx-build
+    'plot_gallery': True,
     'download_all_examples': True,
     'abort_on_example_error': False,
     'only_warn_on_example_error': False,
@@ -81,6 +81,7 @@ DEFAULT_GALLERY_CONF = {
     'image_scrapers': ('matplotlib',),
     'compress_images': (),
     'reset_modules': ('matplotlib', 'seaborn'),
+    'reset_modules_order': 'before',
     'first_notebook_cell': '%matplotlib inline',
     'last_notebook_cell': None,
     'notebook_images': False,
@@ -286,6 +287,14 @@ def _complete_gallery_conf(sphinx_gallery_conf, src_dir, plot_gallery,
             raise ConfigError('Module resetter %r was not callable'
                               % (resetter,))
     gallery_conf['reset_modules'] = tuple(resetters)
+
+    if not isinstance(gallery_conf['reset_modules_order'], str):
+        raise ConfigError('reset_modules_order must be a str, '
+                          'got %r' % gallery_conf['reset_modules_order'])
+    if gallery_conf['reset_modules_order'] not in ['before', 'after', 'both']:
+        raise ConfigError("reset_modules_order must be in"
+                          "['before', 'after', 'both'], "
+                          'got %r' % gallery_conf['reset_modules_order'])
 
     lang = lang if lang in ('python', 'python3', 'default') else 'python'
     gallery_conf['lang'] = lang
